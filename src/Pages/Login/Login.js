@@ -6,16 +6,12 @@ import AlartMessage from '../../Hooks/AlartMessage';
 
 const Login = () => {
     const { successMessage, errorMessage } = AlartMessage()
-    const { loginEP, loginWithGoogle, loading } = useContext(AuthUser)
+    const { loginEP, loginWithGoogle } = useContext(AuthUser)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
     const navigate = useNavigate()
     const onSubmit = data => {
-        const userData = {
-            email: data.email,
-            password: data.password
-        }
         //login with email and passWord :
         loginEP(data.email, data.password)
             .then(rs => successMessage('login SuccessFull'))
@@ -27,7 +23,7 @@ const Login = () => {
                 successMessage('Login SuccessFull')
                 navigate(from, { replace: true })
             })
-            .then(error => { })
+            .catch(error => { })
     }
     return (
         <div className="bg-base-200">
@@ -40,7 +36,6 @@ const Login = () => {
                         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                             <form onSubmit={handleSubmit(onSubmit)}
                                 className="card-body">
-
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Email</span>
@@ -87,5 +82,4 @@ const Login = () => {
         </div>
     );
 };
-
 export default Login;

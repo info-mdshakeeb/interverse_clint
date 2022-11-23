@@ -3,14 +3,24 @@ import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
 
 const Resistation = () => {
+    const imageBBapi = process.env.REACT_APP_imageBBapi;
+
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
-        const userData = {
-            name: data.name,
-            email: data.email,
-            photoUrl: data.photo,
-        }
-        console.log(userData)
+        // const userData = {
+        //     name: data.name,
+        //     email: data.email,
+        // }
+        // console.log(userData)
+        const image = data.photo[0]
+        const formData = new FormData();
+        formData.append('image', image)
+        const urL = `https://api.imgbb.com/1/upload?expiration=600&key=${imageBBapi}`
+        fetch(urL, {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json())
+            .then(data => console.log(data.data.url))
     }
     return (
         <div className="bg-base-200">
