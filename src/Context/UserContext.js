@@ -7,11 +7,12 @@ export const AuthUser = createContext();
 const auth = getAuth(app);
 const provaider = new GoogleAuthProvider();
 const UserContext = ({ children }) => {
-    const [user, setUser] = useState('');
     const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState('');
+    console.log(user)
     //firebase functions :
     const loginWithGoogle = () => signInWithPopup(auth, provaider);
-    const createuser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+    const createUser = (email, pass) => createUserWithEmailAndPassword(auth, email, pass);
     const updateUser = userinfo => updateProfile(auth.currentUser, userinfo);
     const loginEP = (email, password) => signInWithEmailAndPassword(auth, email, password);
     const logOut = () => signOut(auth)
@@ -28,7 +29,7 @@ const UserContext = ({ children }) => {
         user, setUser,
         loading, setLoading,
         loginWithGoogle,
-        createuser,
+        createUser,
         updateUser,
         loginEP,
         logOut

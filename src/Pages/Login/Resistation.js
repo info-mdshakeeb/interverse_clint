@@ -1,26 +1,51 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import SmallSpin from '../../Components/SmallSpin';
+import { AuthUser } from '../../Context/UserContext';
+import AlartMessage from '../../Hooks/AlartMessage';
 
 const Resistation = () => {
     const imageBBapi = process.env.REACT_APP_imageBBapi;
-
+    const { successMessage, errorMessage } = AlartMessage();
+    const navigation = useNavigate();
+    const { createUser, updateUser, loading, setLoading } = useContext(AuthUser)
     const { register, handleSubmit, formState: { errors } } = useForm();
+
     const onSubmit = data => {
-        // const userData = {
-        //     name: data.name,
-        //     email: data.email,
-        // }
-        // console.log(userData)
         const image = data.photo[0]
         const formData = new FormData();
         formData.append('image', image)
-        const urL = `https://api.imgbb.com/1/upload?expiration=600&key=${imageBBapi}`
+        const urL = `https://api.imgbb.com/1/upload?key=${imageBBapi}`
         fetch(urL, {
             method: 'POST',
             body: formData
         }).then(res => res.json())
-            .then(data => console.log(data.data.url))
+            .then(dataImage => {
+                if (dataImage.success) {
+                    setLoading(true)
+                    createUser(data.email, data.password)
+                        .then(rs => {
+                            const userInfo = {
+                                displayName: data.name,
+                                photoURL: dataImage.data.url
+                            }
+                            updateUser(userInfo)
+                                .then(rs => {
+                                    successMessage('Accout Create SuccessFully')
+                                    navigation('/')
+                                })
+                                .catch(error => errorMessage(error.message))
+                        })
+                        .catch(error => {
+                            setLoading(false)
+                            errorMessage(error.message)
+                        })
+                }
+            })
+            .catch(error => console.log(error.name, '-', error.message)
+            )
+
     }
     return (
         <div className="bg-base-200">
@@ -73,7 +98,7 @@ const Resistation = () => {
                                 <div className="form-control">
 
                                     <div className="flex w-full">
-                                        <button className="btn btn-primary w-3/5 mt-3">SignUp</button>
+                                        <button className="btn btn-primary w-3/5 mt-3">{loading ? <SmallSpin /> : 'SignUp'}</button>
                                         <div className="divider divider-horizontal ">OR</div>
                                         <p className='flex justify-center items-center mt-3 btn-primary btn'>G</p>
                                     </div>
