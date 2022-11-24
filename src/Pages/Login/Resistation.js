@@ -13,6 +13,7 @@ const Resistation = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = data => {
+        setLoading(true)
         const image = data.photo[0]
         const formData = new FormData();
         formData.append('image', image)
@@ -23,7 +24,7 @@ const Resistation = () => {
         }).then(res => res.json())
             .then(dataImage => {
                 if (dataImage.success) {
-                    setLoading(true)
+
                     createUser(data.email, data.password)
                         .then(rs => {
                             const userInfo = {

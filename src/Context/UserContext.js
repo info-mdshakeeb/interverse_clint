@@ -9,7 +9,7 @@ const provaider = new GoogleAuthProvider();
 const UserContext = ({ children }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState('');
-    console.log(user)
+    // console.log(user)
     //firebase functions :
     const loginWithGoogle = () => signInWithPopup(auth, provaider);
     const createUser = (email, pass) => createUserWithEmailAndPassword(auth, email, pass);

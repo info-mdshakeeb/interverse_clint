@@ -9,6 +9,7 @@ const Navbar = () => {
     const navitems =
         <>
             <li><NavLink to='/home'>Home</NavLink></li>
+            <li><NavLink to='/addusedproduct'>Add UsedProduct</NavLink></li>
             {!user && <li><NavLink to='/login'>Login</NavLink></li>}
         </>
     return (
