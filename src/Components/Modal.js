@@ -1,13 +1,31 @@
 import React, { useContext } from 'react';
-import { useForm } from 'react-hook-form';
 import { AuthUser } from '../Context/UserContext';
 
 const Modal = ({ setModalData, modalData }) => {
     const { catogory, dateAdded, location, original_price, productName, resale_price, sellerName, years_of_use, sellerEmail } = modalData;
     const { user } = useContext(AuthUser);
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
 
+    const handleSubmit = e => {
+        e.preventDefault()
+        const form = e.target;
+        const sellerName = form.sellerName.value;
+        const productName = form.productName.value;
+        const email = form.sellerEmail.value;
+        const price = form.prlicePrice.value;
+        const phone_number = form.phone_number.value;
+        const mettingLocation = form.mettingLocation.value;
+        const booking = {
+
+            sellerName,
+            productName,
+            email,
+            phone: phone_number,
+            price,
+            mettingLocation,
+
+        }
+        console.log(booking);
+        setModalData(null)
     }
     return (
         <div>
@@ -15,38 +33,82 @@ const Modal = ({ setModalData, modalData }) => {
             <div className="modal">
                 <div className="modal-box relative">
                     <label htmlFor="Open_modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 className="text-lg font-bold">Want to book somthing : {user.displayName}</h3>
 
-
-                    <form onSubmit={handleSubmit(onSubmit)}
+                    <form onSubmit={handleSubmit}
                         className="">
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text">Seller Name</span>
                             </label>
-                            <input type="text" placeholder="email" className="input input-bordered"
-                                {...register("email", { required: 'Email must required' })}
+                            <input type="text"
+                                placeholder="name"
+                                defaultValue={sellerName}
+                                name='sellerName'
+                                disabled className="input input-bordered"
                             />
-                            {errors.email && <span className="label-text text-red-400">{errors?.email.message}</span>}
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text">Seller Email</span>
+                            </label>
+                            <input type="email"
+                                placeholder="email"
+                                name='sellerEmail'
+                                disabled className="input input-bordered"
+                                defaultValue={sellerEmail}
+                            />
+                        </div>
+                        <div className="form-control ">
+                            <label className="label">
+                                <span className="label-text">Relice Price</span>
+                            </label>
+                            <input type="number"
+                                placeholder="Pelice Price"
+                                name='prlicePrice'
+                                disabled className="input input-bordered"
+                                defaultValue={resale_price}
+                            />
+                        </div>
+                        <div className="form-control md:pl-2 ">
+                            <label className="label">
+                                <span className="label-text">Item Name</span>
+                            </label>
+                            <input type="text"
+                                placeholder="item name"
+                                name='productName'
+                                disabled className="input input-bordered"
+                                defaultValue={productName}
+
+                            />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">meeting location</span>
                             </label>
                             <input
-                                type="password"
-                                placeholder="password"
+                                type="text"
+                                placeholder="location"
+                                name='mettingLocation'
                                 className="input input-bordered"
-                                {...register("password")}
+                            />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Your Phone Number</span>
+                            </label>
+                            <input
+                                type="number"
+                                placeholder="Phone number"
+                                name='phone_number'
+                                className="input input-bordered"
+
                             />
                         </div>
                         <div className="w-full">
                             <button className="btn btn-primary w-full mt-5">Place Order</button>
-
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     );
