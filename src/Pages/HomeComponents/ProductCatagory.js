@@ -18,23 +18,35 @@ const ProductCatagory = () => {
         }
     })
     console.log(services);
-    if (isLoading) return <div className="flex justify-center items-center h-screen">
+    if (isLoading) return <div className="justify-center items-center h-screen">
         <SmallSpin />
     </div>
     return (
-        <div className='p-10 md:p-32 lg:p-10 lg:grid grid-cols-2 gap-5 h-screen items-center'>
+        <div className='p-5 md:w-5/6 lg:w-4/6 mx-auto'>
             {
                 services?.map(service =>
-                    <div className="card  mx-auto bg-base-100 shadow-xl" key={service._id}>
-                        <figure><img className='h-96 w-full' src={service.photoUrl} alt="pictures" /></figure>
-                        <div className="card-body">
+
+                    <div className="card md:card-side my-5 shadow-xl" key={service._id}>
+                        <figure><img className='h-96 md:h-full w-full md:w-96' src={service.photoUrl} alt="pictures" /></figure>
+                        <div className="card-body ">
                             <h2 className="card-title">Device Name: {service.productName}</h2>
-                            <div className="">
-                                <div className=" flex ">
+                            <div className=" py-5">
+                                <div className="">
                                     <p>publishName : {service.sellerName}</p>
                                     <p>publis Date : {service.dateAdded}</p>
                                 </div>
+                                <div className="mt-5">
+                                    <p>Location:{service.location}</p>
+                                    <p>Phone use :{service.years_of_use} yr</p>
+                                </div>
+                                <div className="mt-5">
+                                    <p>Original price :{service.original_price} yr</p>
+                                    <p>Relice price :{service.resale_price} yr</p>
+                                </div>
 
+                            </div>
+                            <div className="card-actions justify-end">
+                                <button className="btn btn-primary">Listen</button>
                             </div>
                         </div>
                     </div>

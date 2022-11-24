@@ -6,6 +6,7 @@ import Addusedproduct from "../Pages/HomeComponents/Addusedproduct";
 import ProductCatagory from "../Pages/HomeComponents/ProductCatagory";
 import Login from "../Pages/Login/Login";
 import Resistation from "../Pages/Login/Resistation";
+import PrivateRoute from "../Routers/PrivateROute";
 
 
 export const router = createBrowserRouter([
@@ -18,9 +19,9 @@ export const router = createBrowserRouter([
             {
                 path: '/productcatagory/:id',
                 loader: ({ params }) => fetch(`http://localhost:2100/productcatagory/${params.id}`),
-                element: <ProductCatagory />
+                element: <PrivateRoute><ProductCatagory /></PrivateRoute>
             },
-            { path: '/addusedproduct', element: <Addusedproduct /> },
+            { path: '/addusedproduct', element: <PrivateRoute><Addusedproduct /></PrivateRoute> },
 
         ]
     },
