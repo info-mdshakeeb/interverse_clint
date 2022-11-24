@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Modal from '../../Components/Modal';
 import SmallSpin from '../../Components/SmallSpin';
 
 const ProductCatagory = () => {
     const data = useLoaderData()
     const catagoryName = data.data[0].Name
-    console.log(catagoryName);
-
+    const [modalData, setModalData] = useState(null);
     const url = `http://localhost:2100/usephoneServices?catagory=${catagoryName}`
     const { data: services = [], isLoading } = useQuery({
         queryKey: [''],
@@ -17,7 +17,6 @@ const ProductCatagory = () => {
             return data.data
         }
     })
-    console.log(services);
     if (isLoading) return <div className="justify-center items-center h-screen">
         <SmallSpin />
     </div>
@@ -46,12 +45,21 @@ const ProductCatagory = () => {
 
                             </div>
                             <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Listen</button>
+                                <label
+                                    onClick={() => setModalData(service)}
+                                    htmlFor="Open_modal" className="btn btn-primary">Book Now</label>
                             </div>
+                            {modalData &&
+                                <Modal
+                                    modalData={modalData}
+                                    setModalData={setModalData}
+                                />
+                            }
                         </div>
                     </div>
                 )
             }
+
         </div>
     );
 };
