@@ -15,7 +15,10 @@ const UserContext = ({ children }) => {
     const createUser = (email, pass) => createUserWithEmailAndPassword(auth, email, pass);
     const updateUser = userinfo => updateProfile(auth.currentUser, userinfo);
     const loginEP = (email, password) => signInWithEmailAndPassword(auth, email, password);
-    const logOut = () => signOut(auth)
+    const logOut = () => {
+        signOut(auth)
+        localStorage.removeItem('token')
+    }
 
     useEffect(() => {
         const unsuscribe = onAuthStateChanged(auth, currentUser => {
