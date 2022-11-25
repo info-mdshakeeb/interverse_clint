@@ -3,15 +3,28 @@ import React, { useContext, useState } from 'react';
 import SmallSpin from '../Components/SmallSpin';
 import UpdateUsedProductModal from '../Components/UpdateUsedProductModal';
 import { AuthUser } from '../Context/UserContext';
+import AlartMessage from '../Hooks/AlartMessage';
 
 const MyProduct = () => {
+    const { successMessage } = AlartMessage()
     const { user } = useContext(AuthUser);
     const [datainfo, setDatainfo] = useState(null)
-    // console.log(data);
-    // const heandelUpdate = id => {
-    //     console.log(id);
-    // }
 
+    const hendelPublish = id => {
+        const isAva = {
+            type: 'publise'
+        }
+        fetch(`http://localhost:2100/usephoneServices/publish/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(isAva)
+        }).then(rs => {
+            successMessage("updated publiseD")
+        })
+            .catch(err => console.log(err))
+    }
     const url = `http://localhost:2100/myproducts?email=${user.email}`;
 
     const { data: orders = [], isLoading, refetch } = useQuery({
@@ -65,7 +78,11 @@ const MyProduct = () => {
                                     </td>
                                     {order.available === "available" &&
                                         <td>
-                                            <button className='btn btn-sm btn-warning'>publis</button>
+                                            {
+                                                <button
+                                                    onClick={() => hendelPublish(order._id)}
+                                                    className='btn btn-sm btn-warning'>advertise</button>
+                                            }
                                         </td>
                                     }
                                 </tr>
