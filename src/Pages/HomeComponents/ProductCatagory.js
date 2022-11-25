@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import Modal from '../../Components/Modal';
+import OrderModal from '../../Components/OrderModule';
 import SmallSpin from '../../Components/SmallSpin';
 
 const ProductCatagory = () => {
@@ -50,7 +50,7 @@ const ProductCatagory = () => {
                                     htmlFor="Open_modal" className="btn btn-primary">Book Now</label>
                             </div>
                             {modalData &&
-                                <Modal
+                                <OrderModal
                                     modalData={modalData}
                                     setModalData={setModalData}
                                 />

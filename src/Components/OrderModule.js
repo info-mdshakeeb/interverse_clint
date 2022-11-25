@@ -1,31 +1,50 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthUser } from '../Context/UserContext';
+import AlartMessage from '../Hooks/AlartMessage';
 
-const Modal = ({ setModalData, modalData }) => {
-    const { catogory, dateAdded, location, original_price, productName, resale_price, sellerName, years_of_use, sellerEmail } = modalData;
-    const { user } = useContext(AuthUser);
-
+const OrderModal = ({ setModalData, modalData }) => {
+    const { productName, resale_price, sellerName, sellerEmail, photoUrl } = modalData;
+    // console.log(modalData)
+    const { user } = useContext(AuthUser)
+    const navigate = useNavigate()
+    const { successMessage, errorMessage } = AlartMessage()
     const handleSubmit = e => {
         e.preventDefault()
         const form = e.target;
         const sellerName = form.sellerName.value;
         const productName = form.productName.value;
-        const email = form.sellerEmail.value;
+        const sellerEmail = form.sellerEmail.value;
         const price = form.prlicePrice.value;
         const phone_number = form.phone_number.value;
         const mettingLocation = form.mettingLocation.value;
-        const booking = {
+        const bookingsDetails = {
 
             sellerName,
+            sellerEmail,
             productName,
-            email,
-            phone: phone_number,
+            photoUrl,
+            buyerName: user.displayName,
+            buyerEmail: user.email,
+            buyerPhone: phone_number,
             price,
             mettingLocation,
-
         }
-        console.log(booking);
-        setModalData(null)
+        fetch('http://localhost:2100/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(bookingsDetails)
+        }).then(rs => {
+            successMessage('booking SuccessFull')
+            setModalData(null)
+            navigate('/myorders')
+
+        }).catch(er => {
+            errorMessage(er.name)
+            setModalData(null)
+        })
     }
     return (
         <div>
@@ -33,7 +52,6 @@ const Modal = ({ setModalData, modalData }) => {
             <div className="modal">
                 <div className="modal-box relative">
                     <label htmlFor="Open_modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-
                     <form onSubmit={handleSubmit}
                         className="">
                         <div className="form-control">
@@ -87,6 +105,7 @@ const Modal = ({ setModalData, modalData }) => {
                             </label>
                             <input
                                 type="text"
+                                required
                                 placeholder="location"
                                 name='mettingLocation'
                                 className="input input-bordered"
@@ -97,6 +116,7 @@ const Modal = ({ setModalData, modalData }) => {
                                 <span className="label-text">Your Phone Number</span>
                             </label>
                             <input
+                                required
                                 type="number"
                                 placeholder="Phone number"
                                 name='phone_number'
@@ -114,4 +134,4 @@ const Modal = ({ setModalData, modalData }) => {
     );
 };
 
-export default Modal;
+export default OrderModal;
