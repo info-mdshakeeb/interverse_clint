@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthUser } from '../../Context/UserContext';
 import AlartMessage from '../../Hooks/AlartMessage';
+import { setAuthToken } from '../../Hooks/auth';
 
 const Login = () => {
     const { successMessage, errorMessage } = AlartMessage()
@@ -21,6 +22,7 @@ const Login = () => {
         loginWithGoogle()
             .then(re => {
                 successMessage('Login SuccessFull')
+                setAuthToken(re.user, 'buyer')
                 navigate(from, { replace: true })
             })
             .catch(error => { })

@@ -1,6 +1,7 @@
-export const setAuth = user => {
+export const setAuthToken = (user, roll) => {
     const currentUser = {
-        email: user.email
+        email: user.email,
+        roll: roll
     }
     fetch(`http://localhost:2100/users/${user?.email}`, {
         method: "PUT",
@@ -9,8 +10,7 @@ export const setAuth = user => {
         },
         body: JSON.stringify(currentUser)
     }).then(res => res.json()).then(data => {
-        console.log(data)
-        localStorage.setItem('token', data.token)
+        localStorage.setItem('token', data.data.token)
     })
 
 }

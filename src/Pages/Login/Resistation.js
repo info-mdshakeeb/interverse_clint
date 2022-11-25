@@ -1,16 +1,19 @@
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SmallSpin from '../../Components/SmallSpin';
 import { AuthUser } from '../../Context/UserContext';
 import AlartMessage from '../../Hooks/AlartMessage';
+import { setAuthToken } from '../../Hooks/auth';
 
 const Resistation = () => {
     const imageBBapi = process.env.REACT_APP_imageBBapi;
     const { successMessage, errorMessage } = AlartMessage();
-    const navigation = useNavigate();
-    const { createUser, updateUser, loading, setLoading } = useContext(AuthUser)
+    const navigate = useNavigate();
+    const { createUser, updateUser, loading, setLoading, loginWithGoogle } = useContext(AuthUser)
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
 
     const onSubmit = data => {
         setLoading(true)
@@ -24,17 +27,17 @@ const Resistation = () => {
         }).then(res => res.json())
             .then(dataImage => {
                 if (dataImage.success) {
-
                     createUser(data.email, data.password)
                         .then(rs => {
                             const userInfo = {
                                 displayName: data.name,
                                 photoURL: dataImage.data.url
                             }
+                            setAuthToken(rs.user, data.type)
                             updateUser(userInfo)
                                 .then(rs => {
                                     successMessage('Accout Create SuccessFully')
-                                    navigation('/')
+                                    navigate('/')
                                 })
                                 .catch(error => errorMessage(error.message))
                         })
@@ -47,6 +50,15 @@ const Resistation = () => {
             .catch(error => console.log(error.name, '-', error.message)
             )
 
+    }
+    const heandelGoogleLogin = () => {
+        loginWithGoogle()
+            .then(re => {
+                successMessage('Login SuccessFull')
+                setAuthToken(re.user, 'buyer')
+                navigate(from, { replace: true })
+            })
+            .catch(error => { })
     }
     return (
         <div className="bg-base-200">
@@ -66,16 +78,31 @@ const Resistation = () => {
                                     <input type="text" placeholder="name" className="input input-bordered"
                                         {...register("name", { required: 'Name must required' })}
                                     />
-                                    {errors.name && <span className="label-text text-red-400">{errors?.email.name}</span>}
+                                    {errors.name && <span className="label-text text-red-400">{errors?.name.message}</span>}
                                 </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text">Email</span>
-                                    </label>
-                                    <input type="text" placeholder="email" className="input input-bordered"
-                                        {...register("email", { required: 'Email must required' })}
-                                    />
-                                    {errors.email && <span className="label-text text-red-400">{errors?.email.message}</span>}
+                                <div className="md:flex">
+                                    <div className="form-control ">
+                                        <label className="label">
+                                            <span className="label-text">Email</span>
+                                        </label>
+                                        <input type="text" placeholder="email" className="input input-bordered"
+                                            {...register("email", { required: 'Email must required' })}
+                                        />
+                                        {errors.email && <span className="label-text text-red-400">{errors?.email.message}</span>}
+                                    </div>
+                                    <div className="md:w-2/6 md:pl-2">
+                                        <div className="form-control">
+                                            <label className="label">
+                                                Type:
+                                            </label>
+                                            <select className="select w-full border-collapse"
+                                                {...register("type", { required: 'needed' })}
+                                            >
+                                                <option defaultValue>buyer</option>
+                                                <option>seller</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -93,15 +120,17 @@ const Resistation = () => {
                                         type="password"
                                         placeholder="password"
                                         className="input input-bordered"
-                                        {...register("password")}
+                                        {...register("password", { required: ' must required' })}
                                     />
+                                    {errors.password && <span className="label-text text-red-400">{errors?.password.message}</span>}
                                 </div>
                                 <div className="form-control">
 
                                     <div className="flex w-full">
                                         <button className="btn btn-primary w-3/5 mt-3">{loading ? <SmallSpin /> : 'SignUp'}</button>
                                         <div className="divider divider-horizontal ">OR</div>
-                                        <p className='flex justify-center items-center mt-3 btn-primary btn'>G</p>
+                                        <p className='flex justify-center items-center mt-3 btn-primary btn'
+                                            onClick={heandelGoogleLogin}>G</p>
                                     </div>
                                 </div>
 

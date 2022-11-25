@@ -13,7 +13,7 @@ const Advertise = () => {
             return data.data
         }
     })
-    console.log(adsData);
+    // console.log(adsData);
 
     return (
         <section className='my-20'>
