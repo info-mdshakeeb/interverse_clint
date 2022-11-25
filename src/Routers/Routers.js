@@ -7,6 +7,7 @@ import ProductCatagory from "../Pages/HomeComponents/ProductCatagory";
 import Login from "../Pages/Login/Login";
 import Resistation from "../Pages/Login/Resistation";
 import MyOrders from "../Pages/MyOrders";
+import MyProduct from "../Pages/MyProduct";
 import PrivateRoute from "../Routers/PrivateROute";
 
 
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
     { path: '/login', element: <Login /> },
     { path: '/resistation', element: <Resistation /> },
     { path: '/myorders', element: <MyOrders /> },
+    { path: '/myproducts', element: <MyProduct /> },
     {
         path: '*', element: <ErrorPage />,
     }
