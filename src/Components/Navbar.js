@@ -9,11 +9,11 @@ const Navbar = () => {
     const navitems =
         <>
             <li><NavLink to='/home'>Home</NavLink></li>
-            <li><NavLink to='/addusedproduct'>Add UsedProduct</NavLink></li>
+            <li><NavLink to='/blogs'>Blog</NavLink></li>
             {!user && <li><NavLink to='/login'>Login</NavLink></li>}
         </>
     return (
-        <div className=' z-50'>
+        <div className=''>
             <div className="navbar bg-base-100  shadow-xl">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -47,8 +47,8 @@ const Navbar = () => {
                         <ul tabIndex={0} className=" mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                             <li>
                                 <Link to='/' className="justify-between">
-                                    Profile
-                                    <span className="badge">{user?.displayName}</span>
+                                    {user.displayName}
+                                    <span className="badge"><Link to='/dashboard'>DashBoarD</Link></span>
                                 </Link>
                             </li>
                             <li><Link onClick={logOut}>Logout</Link></li>
