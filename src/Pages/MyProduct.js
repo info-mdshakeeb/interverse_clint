@@ -1,13 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import SmallSpin from '../Components/SmallSpin';
+import UpdateUsedProductModal from '../Components/UpdateUsedProductModal';
 import { AuthUser } from '../Context/UserContext';
 
 const MyProduct = () => {
     const { user } = useContext(AuthUser);
+    const [datainfo, setDatainfo] = useState(null)
+    // console.log(data);
+    // const heandelUpdate = id => {
+    //     console.log(id);
+    // }
+
     const url = `http://localhost:2100/myproducts?email=${user.email}`;
 
-    const { data: orders = [], isLoading } = useQuery({
+    const { data: orders = [], isLoading, refetch } = useQuery({
         queryKey: [''],
         queryFn: async () => {
             const res = await fetch(url)
@@ -36,7 +43,7 @@ const MyProduct = () => {
                         </thead>
                         <tbody>
                             {orders.map((order, i) =>
-                                <tr>
+                                <tr key={order._id}>
                                     <th> {i + 1} </th>
                                     <td>
                                         <div className="flex items-center space-x-3">
@@ -51,11 +58,26 @@ const MyProduct = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>comming</td>
+                                    <td className="form-control w-40">
+                                        <label
+                                            onClick={() => setDatainfo(order)}
+                                            htmlFor="my-modal-4" className="btn btn-sm">updat sataus</label>
+                                    </td>
+                                    {order.available === "available" &&
+                                        <td>
+                                            <button className='btn btn-sm btn-warning'>publis</button>
+                                        </td>
+                                    }
                                 </tr>
                             )}
                         </tbody>
                     </table>
+                    {datainfo &&
+                        <UpdateUsedProductModal
+                            refetch={refetch}
+                            datainfo={datainfo}
+                            setDatainfo={setDatainfo}
+                        />}
                 </div>
             </div>
         </div>

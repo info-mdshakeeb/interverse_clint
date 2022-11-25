@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
-import SmallSpin from '../../Components/SmallSpin';
-import { AuthUser } from '../../Context/UserContext';
-import AlartMessage from '../../Hooks/AlartMessage';
+import SmallSpin from '../Components/SmallSpin';
+import { AuthUser } from '../Context/UserContext';
+import AlartMessage from '../Hooks/AlartMessage';
 
 
 const Addusedproduct = () => {
@@ -23,7 +23,9 @@ const Addusedproduct = () => {
             resale_price: data.resale_price,
             photoUrl: data.url,
             dateAdded,
-            catogory: data.catogory
+            catogory: data.catogory,
+            condition: data.condition,
+            description: data.description,
         }
 
         fetch('http://localhost:2100/addusedproduct', {
@@ -56,11 +58,10 @@ const Addusedproduct = () => {
     </div>
 
     return (
-        <div className="bg-base-200">
-            <div className="hero  ">
+        <div className="">
+            <div className="hero">
                 <div className=" ">
                     <div className="text-left w-96">
-                        <p className='text-2xl'>Interverse ADD Product</p>
                     </div>
                     <div className="card flex-shrink-0 w-full shadow-2xl">
                         <form onSubmit={handleSubmit(onSubmit)}
@@ -128,21 +129,51 @@ const Addusedproduct = () => {
                                 />
                                 {errors.url && <span className="label-text text-red-400">{errors?.url.message}</span>}
                             </div>
+                            <div className="md:flex">
+                                <div className="form-control md:w-1/2">
+                                    <label className="label">
+                                        sellect catogory
+                                    </label>
+                                    <select className="select w-full"
+                                        {...register("catogory", { required: 'needed' })}
+                                    >
+                                        <option></option>
+                                        {catagorysOptions.map(catagory =>
+                                            <option key={catagory._id}>
+                                                {catagory.Name}
+                                            </option>)
+                                        }
+                                    </select>
+                                    <div className="">{errors.catogory && <span className="label-text text-red-400">{errors?.catogory.message}</span>}</div>
+                                </div>
+                                <div className="form-control md:w-1/2 pl-2">
+                                    <label className="label">
+                                        condition type
+                                    </label>
+                                    <select className="select w-full"
+                                        {...register("condition", { required: 'needed' })}
+                                    >
+                                        <option></option>
+                                        <option>excellent</option>
+                                        <option>good</option>
+                                        <option>fair</option>
+
+                                    </select>
+                                    <div className="">{errors.condition && <span className="label-text text-red-400">{errors?.condition.message}</span>}</div>
+                                </div>
+                            </div>
                             <div className="form-control">
                                 <label className="label">
-                                    sellect catogory
+                                    <span className="label-text"> Description</span>
                                 </label>
-                                <select className="select w-full"
-                                    {...register("catogory", { required: 'needed' })}
-                                >
-                                    <option></option>
-                                    {catagorysOptions.map(catagory =>
-                                        <option key={catagory._id}>
-                                            {catagory.Name}
-                                        </option>)
-                                    }
-                                </select>
-                                <div className="">{errors.catogory && <span className="label-text text-red-400">{errors?.catogory.message}</span>}</div>
+                                <textarea
+                                    type="text"
+                                    placeholder="type"
+                                    className="textarea textarea-bordered"
+                                    {...register("description", { required: 'needed' })} ></textarea>
+
+
+                                {errors.description && <span className="label-text text-red-400">{errors?.description.message}</span>}
                             </div>
                             <div className="form-control">
                                 <button className="btn btn-primary w-full  mt-3">{loading ? <SmallSpin /> : 'Add Product'}</button>
