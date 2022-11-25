@@ -13,7 +13,7 @@ const Navbar = () => {
             {!user && <li><NavLink to='/login'>Login</NavLink></li>}
         </>
     return (
-        <div>
+        <div className=' z-50'>
             <div className="navbar bg-base-100  shadow-xl">
                 <div className="navbar-start">
                     <div className="dropdown">
