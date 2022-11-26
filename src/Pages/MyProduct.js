@@ -21,6 +21,7 @@ const MyProduct = () => {
             },
             body: JSON.stringify(isAva)
         }).then(rs => {
+            refetch()
             successMessage("updated publiseD")
         })
             .catch(err => console.log(err))
@@ -39,7 +40,7 @@ const MyProduct = () => {
         <SmallSpin />
     </div>
 
-    // console.log(orders);
+    console.log(orders);
     return (
         <div>
             <p className="text-2xl py-3">My Product</p>
@@ -74,11 +75,13 @@ const MyProduct = () => {
                                     <td className="form-control w-40">
                                         <label
                                             onClick={() => setDatainfo(order)}
-                                            htmlFor="my-modal-4" className="btn btn-sm">updat sataus</label>
+                                            htmlFor="my-modal-4" className="btn btn-sm btn-success">updat sataus</label>
                                     </td>
                                     {order.available === "available" &&
                                         <td>
-                                            {
+                                            {order.type ? <button
+
+                                                className='btn btn-sm btn-disabledbtn-warning'>advertised</button> :
                                                 <button
                                                     onClick={() => hendelPublish(order._id)}
                                                     className='btn btn-sm btn-warning'>advertise</button>

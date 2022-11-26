@@ -39,7 +39,6 @@ const ProductCatagory = () => {
                                     {service.sellerType &&
                                         <div className="">Verified</div>
                                     }
-
                                 </div>
                                 <p>publis Date : {service.dateAdded}</p>
                                 <div className="mt-5">

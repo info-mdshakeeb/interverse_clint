@@ -6,7 +6,7 @@ const ReportModal = ({ reportModalData, setReportModalData }) => {
     const { user } = useContext(AuthUser)
     const { successMessage, errorMessage } = AlartMessage()
     const { sellerName, sellerEmail, dateAdded, productName, _id, photoUrl } = reportModalData
-    console.log(reportModalData);
+    // console.log(reportModalData);
     const heandelReport = e => {
         e.preventDefault()
         const form = e.target;
@@ -14,6 +14,8 @@ const ReportModal = ({ reportModalData, setReportModalData }) => {
         const ReportData = {
             sellerName,
             sellerEmail,
+            reportedUserName: user.displayName,
+            reportedUserEmail: user.email,
             dateAdded,
             productName,
             productId: _id,

@@ -1,7 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import OrderModal from '../../Components/OrderModule';
+import ReportModal from '../../Components/ReportModal';
 
 const Advertise = () => {
+    const [modalData, setModalData] = useState(null);
+    const [reportModalData, setReportModalData] = useState(null)
     const url = `http://localhost:2100/advertises?available=available&&type=publise`;
 
     const { data: adsData = [] } = useQuery({
@@ -35,14 +39,45 @@ const Advertise = () => {
                                         {ad.productName}
                                         <div className="badge badge-secondary">{ad.condition}</div>
                                     </h2>
-                                    <div className="">seller Name : {ad.sellerName}</div>
+                                    <div className="flex">
+                                        <div className="">
+                                            <p className='pr-3'> {ad.sellerName}</p>
+                                        </div>
+                                        {ad.sellerType &&
+                                            <div className="">Verified</div>
+                                        }
+                                    </div>
                                     <div className="">locatiopn : {ad.location}</div>
+                                    <div className=" card-footer">
+                                        <div className="card-actions justify-end">
+                                            <label
+                                                onClick={() => setModalData(ad)}
+                                                htmlFor="Open_modal" className="btn btn-primary btn-sm">Book Now</label>
+                                            <label
+                                                htmlFor="report_modal"
+                                                onClick={() => setReportModalData(ad)}
+                                                className="btn btn-primary btn-sm">Report to admin</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     )
                 }
             </div>
+            {modalData &&
+                <OrderModal
+                    modalData={modalData}
+                    setModalData={setModalData}
+                />
+            }
+            {reportModalData &&
+                <ReportModal
+                    reportModalData={reportModalData}
+                    setReportModalData={setReportModalData}
+                />
+
+            }
 
 
         </section>
