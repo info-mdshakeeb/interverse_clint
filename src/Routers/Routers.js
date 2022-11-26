@@ -11,6 +11,7 @@ import Resistation from "../Pages/Login/Resistation";
 import MyOrders from "../Pages/MyOrders";
 import MyProduct from "../Pages/MyProduct";
 import PrivateRoute from "../Routers/PrivateROute";
+import SellerRouter from "./SellerRouter";
 
 
 export const router = createBrowserRouter([
@@ -26,19 +27,15 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:2100/productcatagory/${params.id}`),
                 element: <PrivateRoute><ProductCatagory /></PrivateRoute>
             },
-
-
         ]
     },
     {
         path: '/dashboard',
         element: <PrivateRoute><Dashbord /></PrivateRoute>,
         children: [
-            { path: '/dashboard/myproducts', element: <PrivateRoute><MyProduct /></PrivateRoute> },
-            { path: '/dashboard/myorders', element: <PrivateRoute><MyOrders /></PrivateRoute> },
-            { path: '/dashboard/addusedproduct', element: <PrivateRoute><Addusedproduct /> </PrivateRoute> }
-
-
+            { path: '/dashboard/myproducts', element: <MyProduct /> },
+            { path: '/dashboard/myorders', element: <SellerRouter><MyOrders /></SellerRouter> },
+            { path: '/dashboard/addusedproduct', element: <Addusedproduct /> }
         ]
     },
     { path: '/login', element: <Login /> },

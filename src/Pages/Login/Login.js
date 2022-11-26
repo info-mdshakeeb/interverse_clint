@@ -15,15 +15,19 @@ const Login = () => {
     const onSubmit = data => {
         //login with email and passWord :
         loginEP(data.email, data.password)
-            .then(rs => successMessage('login SuccessFull'))
+            .then(rs => {
+                successMessage('login SuccessFull')
+                navigate('/home')
+                setAuthToken(rs.user)
+            })
             .catch(err => errorMessage(err.message))
     }
     const heandelGoogleLogin = () => {
         loginWithGoogle()
             .then(re => {
                 successMessage('Login SuccessFull')
-                setAuthToken(re.user, 'buyer')
                 navigate(from, { replace: true })
+                setAuthToken(re.user, 'buyer')
             })
             .catch(error => { })
     }

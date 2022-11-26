@@ -27,13 +27,14 @@ const Addusedproduct = () => {
             condition: data.condition,
             description: data.description,
         }
-
         fetch('http://localhost:2100/addusedproduct', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'authorization': localStorage.getItem('token')
             },
             body: JSON.stringify(phoneDetail)
+
         }).then(re => {
             successMessage('added product successfully')
             setLoading(false)
@@ -42,7 +43,6 @@ const Addusedproduct = () => {
                 setLoading(false)
                 console.log(er.message)
             })
-
     }
     //optino data load :
     const { data: catagorysOptions = [], isLoading } = useQuery({

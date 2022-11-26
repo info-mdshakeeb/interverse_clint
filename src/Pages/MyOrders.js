@@ -20,7 +20,7 @@ const MyOrders = () => {
         <SmallSpin />
     </div>
 
-    console.log(bookings);
+    // console.log(bookings);
     return (
         <div>
             <p className="text-2xl py-3">My Orders</p>

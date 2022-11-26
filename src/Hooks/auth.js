@@ -1,7 +1,7 @@
-export const setAuthToken = (user, roll) => {
+export const setAuthToken = (user, role) => {
     const currentUser = {
         email: user.email,
-        roll: roll
+        role: role
     }
     fetch(`http://localhost:2100/users/${user?.email}`, {
         method: "PUT",
