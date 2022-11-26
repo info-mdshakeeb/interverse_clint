@@ -31,7 +31,7 @@ const Advertise = () => {
             <div className="grid md:gap-8 md:grid-cols-2 lg:grid-cols-3 md:px-10">
                 {
                     adsData.map(ad =>
-                        <div>
+                        <div key={ad._id}>
                             <div className="card w-full shadow-xl">
                                 <figure><img className='w-full h-52 ' src={ad.photoUrl} alt="Shoes" /></figure>
                                 <div className="card-body">
@@ -47,9 +47,9 @@ const Advertise = () => {
                                             <div className="">Verified</div>
                                         }
                                     </div>
-                                    <div className="">locatiopn : {ad.location}</div>
+                                    <div className="">Price :{ad.resale_price}</div>
                                     <div className=" card-footer">
-                                        <div className="card-actions justify-end">
+                                        <div className="card-actions pt-5 justify-end">
                                             <label
                                                 onClick={() => setModalData(ad)}
                                                 htmlFor="Open_modal" className="btn btn-primary btn-sm">Book Now</label>
