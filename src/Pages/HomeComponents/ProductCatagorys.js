@@ -20,18 +20,18 @@ const ProductCatagorys = () => {
     return (
         <section className='mb-20'>
             <div className="mx-5 flex justify-between ">
-                <div className="my-10">
+                <div className="mb-20">
                     <p className='text-primary'>Phones Catagory </p>
                     <p className='text-4xl'>Whitch brand Phone We provide</p>
                 </div>
 
             </div>
-            <div className="grid md:gap-2 md:grid-cols-2 lg:grid-cols-3 ">
+            <div className="grid md:gap-2 md:grid-cols-2 lg:grid-cols-3 md:px-10 ">
                 {
                     productcatagorys?.map(productcatagory =>
-                        <div className=" shadow-md mx-auto p-10" key={productcatagory._id}>
-                            <div className=" bg-base-100 shadow-2xl ">
-                                <figure><Link to={`/productcatagory/${productcatagory._id}`}><img className=' cursor-pointer rounded-xl h-44 w-80 ' src={productcatagory.pic} alt="Shoes" /></Link></figure>
+                        <div className=" shadow-md mx-auto " key={productcatagory._id}>
+                            <div className="shadow-2xl ">
+                                <figure><Link to={`/productcatagory/${productcatagory._id}`}><img className=' cursor-pointer rounded-xl h-52' src={productcatagory.pic} alt="Shoes" /></Link></figure>
                                 <div className="card">
                                     <h2 className="card-title">
                                         {productcatagory.name}

@@ -39,7 +39,7 @@ const OrderModal = ({ setModalData, modalData }) => {
         }).then(rs => {
             successMessage('booking SuccessFull')
             setModalData(null)
-            navigate('/dashboard/myproducts')
+            navigate('/dashboard/myorders')
 
         }).catch(er => {
             errorMessage(er.name)

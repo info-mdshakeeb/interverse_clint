@@ -24,12 +24,12 @@ const Advertise = () => {
                 </div>
             </div>
 
-            <div className="grid md:gap-5 md:grid-cols-2 lg:grid-cols-4 mx-8">
+            <div className="grid md:gap-8 md:grid-cols-2 lg:grid-cols-3 md:px-10">
                 {
                     adsData.map(ad =>
                         <div>
                             <div className="card w-full shadow-xl">
-                                <figure><img className='w-full h-40 ' src={ad.photoUrl} alt="Shoes" /></figure>
+                                <figure><img className='w-full h-52 ' src={ad.photoUrl} alt="Shoes" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">
                                         {ad.productName}

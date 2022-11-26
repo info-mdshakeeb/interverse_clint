@@ -13,10 +13,10 @@ const AdminRoutes = ({ children }) => {
             <SmallSpin />
         </div>
     }
-    if (!user) {
-        return <Navigate to='/login' state={{ from: location }} replace />
+    if (user) {
+        return children
     }
-    return children
+    return <Navigate to='/login' state={{ from: location }} replace />
 };
 
 export default AdminRoutes;

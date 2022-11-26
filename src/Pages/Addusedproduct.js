@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 import SmallSpin from '../Components/SmallSpin';
 import { AuthUser } from '../Context/UserContext';
 import AlartMessage from '../Hooks/AlartMessage';
@@ -9,6 +10,7 @@ import AlartMessage from '../Hooks/AlartMessage';
 const Addusedproduct = () => {
     const { user, loading, setLoading } = useContext(AuthUser);
     const { successMessage } = AlartMessage()
+    const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = (data) => {
         setLoading(true)
@@ -37,6 +39,7 @@ const Addusedproduct = () => {
 
         }).then(re => {
             successMessage('added product successfully')
+            navigate('/dashboard/myproducts')
             setLoading(false)
         })
             .catch(er => {

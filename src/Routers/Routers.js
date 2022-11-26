@@ -33,9 +33,9 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><Dashbord /></PrivateRoute>,
         children: [
-            { path: '/dashboard/myproducts', element: <MyProduct /> },
-            { path: '/dashboard/myorders', element: <SellerRouter><MyOrders /></SellerRouter> },
-            { path: '/dashboard/addusedproduct', element: <Addusedproduct /> }
+            { path: '/dashboard/myproducts', element: <SellerRouter><MyProduct /> </SellerRouter> },
+            { path: '/dashboard/myorders', element: <MyOrders /> },
+            { path: '/dashboard/addusedproduct', element: <SellerRouter><Addusedproduct /></SellerRouter> }
         ]
     },
     { path: '/login', element: <Login /> },
