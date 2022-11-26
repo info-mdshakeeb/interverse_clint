@@ -82,7 +82,7 @@ const Addusedproduct = () => {
                             className="card-body">
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Name</span>
+                                    <span className="label-text">Product Name</span>
                                 </label>
                                 <input type="text" placeholder="name" className="input input-bordered"
                                     {...register("name", { required: 'Name must required' })}
