@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
-import SmallSpin from '../Components/SmallSpin';
+import { useQuery } from "@tanstack/react-query";
+import { useContext, useState } from "react";
+import SmallSpin from "../Components/SmallSpin";
 import UpdateUsedProductModal from '../Components/UpdateUsedProductModal';
-import { AuthUser } from '../Context/UserContext';
-import AlartMessage from '../Hooks/AlartMessage';
+import { AuthUser } from "../Context/UserContext";
+import AlartMessage from "../Hooks/AlartMessage";
 
 const MyProduct = () => {
     const { successMessage } = AlartMessage()
