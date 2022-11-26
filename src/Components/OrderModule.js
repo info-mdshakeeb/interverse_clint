@@ -51,7 +51,9 @@ const OrderModal = ({ setModalData, modalData }) => {
             <input type="checkbox" id="Open_modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative">
-                    <label htmlFor="Open_modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label
+                        onClick={() => setModalData(null)}
+                        htmlFor="Open_modal" className="btn btn-sm  btn-circle absolute right-2 top-2">✕</label>
                     <form onSubmit={handleSubmit}
                         className="">
                         <div className="form-control">

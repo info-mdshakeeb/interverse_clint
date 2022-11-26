@@ -12,12 +12,22 @@ const Addusedproduct = () => {
     const { successMessage } = AlartMessage()
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const { data: seller = [] } = useQuery({
+        queryKey: ['seller'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:2100/admin/${user?.email}`)
+            const data = await res.json()
+            return data.data[0]
+        }
+    })
     const onSubmit = (data) => {
         setLoading(true)
         const dateAdded = new Date();
         const phoneDetail = {
             sellerEmail: user.email,
             sellerName: user.displayName,
+            sellerType: seller?.type,
             productName: data.name,
             location: data.location,
             years_of_use: data.years_of_use,
@@ -56,6 +66,7 @@ const Addusedproduct = () => {
             return data.data
         }
     })
+
     if (isLoading) return <div className="flex justify-center items-center h-screen">
         <SmallSpin />
     </div>
