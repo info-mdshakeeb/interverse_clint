@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import PaymentModal from '../Components/DashboardComponent/PaymentModal';
 import SmallSpin from '../Components/SmallSpin';
 import { AuthUser } from '../Context/UserContext';
 
 const MyOrders = () => {
     const { user } = useContext(AuthUser);
+    const [pay, setPay] = useState(null)
     const url = `http://localhost:2100/mybooking?email=${user.email}`;
 
     const { data: bookings = [], isLoading } = useQuery({
@@ -60,17 +61,22 @@ const MyOrders = () => {
                                     </td>
                                     {booking?.paid ? <td>payed</td> : <td>Pending</td>}
                                     <td>{booking.price && !booking.paid &&
-                                        <Link to=''><p className='btn btn-warning btn-sm'>pay</p></Link>
+                                        <label
+                                            onClick={() => setPay(booking)}
+                                            htmlFor="paymemt-modal" className="btn btn-warning btn-sm">Pay</label>
                                     }</td>
                                 </tr>
-
-                            )
-
-                            }
+                            )}
 
                         </tbody>
-
                     </table>
+                    {pay &&
+                        <PaymentModal
+                            setPay={setPay}
+                            isLoading={isLoading}
+                            pay={pay} />
+                    }
+
                 </div>
             </div>
         </div>

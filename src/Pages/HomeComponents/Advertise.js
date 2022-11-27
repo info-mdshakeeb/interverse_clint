@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import OrderModal from '../../Components/OrderModule';
 import ReportModal from '../../Components/ReportModal';
+import { AuthUser } from '../../Context/UserContext';
 
 const Advertise = () => {
     const [modalData, setModalData] = useState(null);
+    const { user } = useContext(AuthUser);
     const [reportModalData, setReportModalData] = useState(null)
     const url = `http://localhost:2100/advertises?available=available&&type=publise`;
 
@@ -48,17 +50,19 @@ const Advertise = () => {
                                         }
                                     </div>
                                     <div className="">Price :{ad.resale_price}</div>
-                                    <div className=" card-footer">
-                                        <div className="card-actions pt-5 justify-end">
-                                            <label
-                                                onClick={() => setModalData(ad)}
-                                                htmlFor="Open_modal" className="btn btn-primary btn-sm">Book Now</label>
-                                            <label
-                                                htmlFor="report_modal"
-                                                onClick={() => setReportModalData(ad)}
-                                                className="btn btn-primary btn-sm">Report to admin</label>
+                                    {user &&
+                                        <div className=" card-footer">
+                                            <div className="card-actions pt-5 justify-end">
+                                                <label
+                                                    onClick={() => setModalData(ad)}
+                                                    htmlFor="Open_modal" className="btn btn-primary btn-sm">Book Now</label>
+                                                <label
+                                                    htmlFor="report_modal"
+                                                    onClick={() => setReportModalData(ad)}
+                                                    className="btn btn-primary btn-sm">Report to admin</label>
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                         </div>

@@ -3,7 +3,7 @@ import React from 'react';
 
 const ReportedItem = () => {
     const url = `http://localhost:2100/reports`
-    const { data: reports = [], refetch, isLoading } = useQuery({
+    const { data: reports = [] } = useQuery({
         queryKey: [],
         queryFn: async () => {
             const res = await fetch(url)
