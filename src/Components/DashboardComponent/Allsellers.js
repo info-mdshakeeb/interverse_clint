@@ -38,7 +38,7 @@ const Allsellers = () => {
     if (isLoading) return <SmallSpin />
     return (
         <div>
-            <p className="text-2xl py-3">All Buyers</p>
+            <p className="text-2xl p-5">All Sellers</p>
             <div className="md:w-4/6 mx-auto">
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full">

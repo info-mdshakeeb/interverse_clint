@@ -1,3 +1,4 @@
+import { UisCheckCircle } from '@iconscout/react-unicons-solid';
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
 import OrderModal from '../../Components/OrderModule';
@@ -34,7 +35,7 @@ const Advertise = () => {
                 {
                     adsData.map(ad =>
                         <div key={ad._id}>
-                            <div className="card w-full shadow-xl">
+                            <div className="card w-full p-5 md:p-0 shadow-xl">
                                 <figure><img className='w-full h-52 ' src={ad.photoUrl} alt="Shoes" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title">
@@ -46,7 +47,7 @@ const Advertise = () => {
                                             <p className='pr-3'> {ad.sellerName}</p>
                                         </div>
                                         {ad.sellerType &&
-                                            <div className="">Verified</div>
+                                            <UisCheckCircle className='text-blue-500 w-4' />
                                         }
                                     </div>
                                     <div className="">Price :{ad.resale_price}</div>

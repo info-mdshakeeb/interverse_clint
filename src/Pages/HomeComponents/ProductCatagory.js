@@ -1,3 +1,4 @@
+import { UisCheckCircle } from '@iconscout/react-unicons-solid';
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
@@ -19,6 +20,7 @@ const ProductCatagory = () => {
             return data.data
         }
     })
+    console.log(services);
     if (isLoading) return <div className="justify-center items-center h-screen">
         <SmallSpin />
     </div>
@@ -37,7 +39,7 @@ const ProductCatagory = () => {
                                         <p className='pr-3'> {service.sellerName}</p>
                                     </div>
                                     {service.sellerType &&
-                                        <div className="">Verified</div>
+                                        <UisCheckCircle className='text-blue-500 w-4' />
                                     }
                                 </div>
                                 <p>publis Date : {service.dateAdded}</p>
@@ -48,6 +50,9 @@ const ProductCatagory = () => {
                                 <div className="mt-5">
                                     <p>Original price :{service.original_price} yr</p>
                                     <p>Relice price :{service.resale_price} yr</p>
+                                    {service.type === 'publise' ? <p>Type : Avalable </p> :
+                                        <p>Type : {service.type} </p>
+                                    }
                                 </div>
 
                             </div>

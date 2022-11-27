@@ -41,7 +41,7 @@ const MyProduct = () => {
     </div>
     // console.log(orders);
     return (
-        <div>
+        <div className="py-5 pl-5">
             <p className="text-2xl py-3">My Product</p>
             <div className="md:w-4/6 mx-auto">
                 <div className="overflow-x-auto w-full">

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import SmallSpin from '../Components/SmallSpin';
+import LoadingSpinner from '../Components/LoadingSpinner';
 import { AuthUser } from '../Context/UserContext';
 
 const PrivateRoute = ({ children }) => {
@@ -9,8 +9,8 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation();
 
     if (loading) {
-        return <div className="  flex items-center justify-center">
-            <SmallSpin />
+        return <div className="  flex items-center h-screen w-40 mx-auto">
+            <LoadingSpinner />
         </div>
     }
     if (!user) {

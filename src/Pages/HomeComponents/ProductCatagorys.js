@@ -29,9 +29,10 @@ const ProductCatagorys = () => {
             <div className="grid md:gap-2 md:grid-cols-2 lg:grid-cols-3 md:px-10 ">
                 {
                     productcatagorys?.map(productcatagory =>
-                        <div className=" shadow-md mx-auto " key={productcatagory._id}>
-                            <div className="shadow-2xl ">
-                                <figure><Link to={`/productcatagory/${productcatagory._id}`}><img className=' cursor-pointer rounded-xl h-52' src={productcatagory.pic} alt="Shoes" /></Link></figure>
+                        <div className=" shadow-md mx-auto md:mt-0 md:w-full " key={productcatagory._id}>
+                            <div className="shadow-2xl p-5 md:p-0 ">
+                                <figure><Link to={`/productcatagory/${productcatagory._id}`}>
+                                    <img className=' cursor-pointer rounded-xl md:h-52 ' src={productcatagory.pic} alt="Shoes" /></Link></figure>
                                 <div className="card">
                                     <h2 className="card-title">
                                         {productcatagory.name}

@@ -8,7 +8,6 @@ const MyOrders = () => {
     const { user } = useContext(AuthUser);
     const [pay, setPay] = useState(null)
     const url = `http://localhost:2100/mybooking?email=${user.email}`;
-
     const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: [''],
         queryFn: async () => {
@@ -21,11 +20,10 @@ const MyOrders = () => {
         <SmallSpin />
     </div>
     refetch()
-
-    console.log(bookings);
+    // console.log(bookings);
     return (
         <div>
-            <p className="text-2xl py-3">My Orders</p>
+            <p className="pl-5 text-2xl py-5">My Orders</p>
             <div className="md:w-4/6 mx-auto">
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full">
@@ -68,7 +66,6 @@ const MyOrders = () => {
                                     }</td>
                                 </tr>
                             )}
-
                         </tbody>
                     </table>
                     {pay &&

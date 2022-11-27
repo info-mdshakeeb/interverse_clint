@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import { AuthUser } from '../Context/UserContext';
 import useAdmin from '../Hooks/useAdmin';
@@ -12,32 +12,54 @@ const Dashbord = () => {
     return (
         <div>
             < Navbar />
-            <div className="drawer drawer-mobile  ">
-                <input id="side-nav" type="checkbox" className="drawer-toggle" />
+            <div className="drawer drawer-mobile">
+                <input id="sideNav" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content ">
                     <Outlet />
                 </div>
                 <div className="drawer-side">
-                    <label htmlFor="side-navb" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80  text-base-content">
-
-                        <li ><Link to='/dashboard/myorders'>My Orders</Link></li>
+                    <label htmlFor="sideNav" className="drawer-overlay"></label>
+                    <ul className="menu p-4 w-80 text-base-content">
+                        <li ><NavLink to='/dashboard/myorders'>My Orders</NavLink></li>
                         {(isSeller || isAdmin) &&
                             <>
-                                <li ><Link to='/dashboard/myproducts'>My Product</Link></li>
-                                <li ><Link to='/dashboard/addusedproduct'>Add A product</Link></li>
+                                <li ><NavLink to='/dashboard/myproducts'>My Product</NavLink></li>
+                                <li ><NavLink to='/dashboard/addusedproduct'>Add A product</NavLink></li>
                             </>
                         }
                         {isAdmin &&
                             <>
-                                <li ><Link to='/dashboard/allsellers'> All Sellers</Link></li>
-                                <li ><Link to='/dashboard/allbuyers'>All Buyers</Link></li>
-                                <li ><Link to='/dashboard/reporteditem'>Reported Items</Link></li>
+                                <li ><NavLink to='/dashboard/allsellers'> All Sellers</NavLink></li>
+                                <li ><NavLink to='/dashboard/allbuyers'>All Buyers</NavLink></li>
+                                <li ><NavLink to='/dashboard/reporteditem'>Reported Items</NavLink></li>
                             </>}
+
                     </ul>
+
                 </div>
             </div>
+
+
         </div>
+
+
+
+        // <div>
+        //     
+        //     <div className="drawer drawer-mobile  ">
+        //         <input id="side-nav" type="checkbox" className="drawer-toggle" />
+        //         <div className="drawer-content ">
+        //             <Outlet />
+        //         </div>
+        //         <div className="drawer-side">
+        //             <label htmlFor="side-navb" className="drawer-overlay"></label>
+        //             <ul className="menu p-4 w-80  text-base-content">
+
+        //                 
+        //             </ul>
+        //         </div>
+        //     </div>
+        // </div>
     );
 };
 
