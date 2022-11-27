@@ -10,7 +10,7 @@ const UpdateUsedProductModal = ({ datainfo, setDatainfo, refetch }) => {
         const isAva = {
             available: data.sales_status
         }
-        fetch(`http://localhost:2100/usephoneServices/update/${datainfo._id}`, {
+        fetch(`https://interverse.vercel.app/usephoneServices/update/${datainfo._id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

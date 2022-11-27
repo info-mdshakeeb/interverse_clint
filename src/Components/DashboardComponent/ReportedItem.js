@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import SmallSpin from '../SmallSpin';
 
 const ReportedItem = () => {
-    const url = `http://localhost:2100/reports`
-    const { data: reports = [] } = useQuery({
+    const url = `https://interverse.vercel.app/reports`
+    const { data: reports = [], isLoading } = useQuery({
         queryKey: [],
         queryFn: async () => {
             const res = await fetch(url)
@@ -11,7 +12,11 @@ const ReportedItem = () => {
             return data.data
         }
     })
-    console.log(reports);
+    if (isLoading) return (
+        <div className="flex items-center justify-center h-screen">
+            <SmallSpin />
+        </div>)
+    // console.log(reports);
     return (
         <div>
             <div className="my-8">

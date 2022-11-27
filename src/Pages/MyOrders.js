@@ -7,7 +7,7 @@ import { AuthUser } from '../Context/UserContext';
 const MyOrders = () => {
     const { user } = useContext(AuthUser);
     const [pay, setPay] = useState(null)
-    const url = `http://localhost:2100/mybooking?email=${user.email}`;
+    const url = `https://interverse.vercel.app/mybooking?email=${user.email}`;
     const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: [''],
         queryFn: async () => {

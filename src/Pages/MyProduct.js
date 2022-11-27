@@ -14,7 +14,7 @@ const MyProduct = () => {
         const isAva = {
             type: 'publise'
         }
-        fetch(`http://localhost:2100/usephoneServices/publish/${id}`, {
+        fetch(`https://interverse.vercel.app/usephoneServices/publish/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -26,7 +26,7 @@ const MyProduct = () => {
         })
             .catch(err => console.log(err))
     }
-    const url = `http://localhost:2100/myproducts?email=${user.email}`;
+    const url = `https://interverse.vercel.app/myproducts?email=${user.email}`;
 
     const { data: orders = [], isLoading, refetch } = useQuery({
         queryKey: [''],

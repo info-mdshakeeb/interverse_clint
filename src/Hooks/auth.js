@@ -3,7 +3,7 @@ export const setAuthToken = (user, role) => {
         email: user.email,
         role: role
     }
-    fetch(`http://localhost:2100/users/${user?.email}`, {
+    fetch(`https://interverse.vercel.app/users/${user?.email}`, {
         method: "PUT",
         headers: {
             'content-type': 'application/json'

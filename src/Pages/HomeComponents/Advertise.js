@@ -9,7 +9,7 @@ const Advertise = () => {
     const [modalData, setModalData] = useState(null);
     const { user } = useContext(AuthUser);
     const [reportModalData, setReportModalData] = useState(null)
-    const url = `http://localhost:2100/advertises?available=available&&type=publise`;
+    const url = `https://interverse.vercel.app/advertises?available=available&&type=publise`;
 
     const { data: adsData = [] } = useQuery({
         queryKey: ['ad'],

@@ -1,11 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import AlartMessage from '../../Hooks/AlartMessage';
+import SmallSpin from '../SmallSpin';
 
 const Allbuyers = () => {
     const { successMessage } = AlartMessage()
-    const url = `http://localhost:2100/admin/users?role=buyer`
-    const { data: allbyers = [], refetch } = useQuery({
+    const url = `https://interverse.vercel.app/admin/users?role=buyer`
+    const { data: allbyers = [], refetch, isLoading } = useQuery({
         queryKey: [],
         queryFn: async () => {
             const res = await fetch(url)
@@ -14,13 +15,18 @@ const Allbuyers = () => {
         }
     })
     const heandelDelete = id => {
-        fetch(`http://localhost:2100/user/admin/delete/${id}`, {
+        fetch(`https://interverse.vercel.app/user/admin/delete/${id}`, {
             method: "DELETE"
         }).then(res => res.json()).then(data => {
             successMessage('User Deleted')
             refetch()
         })
     }
+    if (isLoading) return (
+        <div className="flex items-center justify-center h-screen">
+            <SmallSpin />
+        </div>
+    )
     return (
         <div className=''>
             <p className="text-2xl py-10 px-5">All Buyers</p>

@@ -22,7 +22,7 @@ const ReportModal = ({ reportModalData, setReportModalData }) => {
             productPic: photoUrl,
             reason,
         }
-        fetch('http://localhost:2100/user/admin/report', {
+        fetch('https://interverse.vercel.app/user/admin/report', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

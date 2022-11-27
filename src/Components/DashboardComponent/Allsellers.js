@@ -5,7 +5,7 @@ import SmallSpin from '../SmallSpin';
 
 const Allsellers = () => {
     const { successMessage } = AlartMessage()
-    const url = `http://localhost:2100/admin/users?role=seller`
+    const url = `https://interverse.vercel.app/admin/users?role=seller`
     const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: [],
         queryFn: async () => {
@@ -16,7 +16,7 @@ const Allsellers = () => {
     })
     const heandelVerify = id => {
         const ststus = { type: 'verified' }
-        fetch(`http://localhost:2100/user/admin/vf/${id}`, {
+        fetch(`https://interverse.vercel.app/user/admin/vf/${id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'
@@ -28,14 +28,17 @@ const Allsellers = () => {
         })
     }
     const heandelDelete = id => {
-        fetch(`http://localhost:2100/user/admin/delete/${id}`, {
+        fetch(`https://interverse.vercel.app/user/admin/delete/${id}`, {
             method: "DELETE"
         }).then(res => res.json()).then(data => {
             successMessage('User Deleted')
             refetch()
         })
     }
-    if (isLoading) return <SmallSpin />
+    if (isLoading) return (
+        <div className="flex items-center justify-center h-screen">
+            <SmallSpin />
+        </div>)
     return (
         <div>
             <p className="text-2xl p-5">All Sellers</p>

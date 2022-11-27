@@ -7,7 +7,7 @@ const ProductCatagorys = () => {
     const { data: productcatagorys = [], isLoading } = useQuery({
         queryKey: ['productcatagory'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:2100/productcatagorys')
+            const res = await fetch('https://interverse.vercel.app/productcatagorys')
             const data = await res.json()
             return data.data
         }

@@ -11,7 +11,7 @@ const ProductCatagory = () => {
     const catagoryName = data.data[0].Name
     const [modalData, setModalData] = useState(null);
     const [reportModalData, setReportModalData] = useState(null)
-    const url = `http://localhost:2100/usephoneServices?catagory=${catagoryName}`
+    const url = `https://interverse.vercel.app/usephoneServices?catagory=${catagoryName}`
     const { data: services = [], isLoading } = useQuery({
         queryKey: [''],
         queryFn: async () => {

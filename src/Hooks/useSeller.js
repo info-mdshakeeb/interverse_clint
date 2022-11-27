@@ -5,7 +5,7 @@ const useSeller = email => {
    const [selletLoadnig, setSelletLoadnig] = useState(true);
 
    useEffect(() => {
-      fetch(`http://localhost:2100/user/seller/${email}`)
+      fetch(`https://interverse.vercel.app/user/seller/${email}`)
          .then(res => res.json())
          .then(data => {
             setisSeller(data.isSeller)

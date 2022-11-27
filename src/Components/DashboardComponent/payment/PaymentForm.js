@@ -11,7 +11,7 @@ const PaymentForm = ({ pay, setPay }) => {
     const [clientSecret, setClientSecret] = useState("");
     console.log(pay);
     useEffect(() => {
-        fetch("http://localhost:2100/create-payment-intent", {
+        fetch("https://interverse.vercel.app/create-payment-intent", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ price }),
@@ -55,7 +55,7 @@ const PaymentForm = ({ pay, setPay }) => {
         const isAva = {
             type: 'sold'
         }
-        fetch(`http://localhost:2100/usephoneServices/publish/${pay.productID}`, {
+        fetch(`https://interverse.vercel.app/usephoneServices/publish/${pay.productID}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -66,7 +66,7 @@ const PaymentForm = ({ pay, setPay }) => {
                 const type = {
                     available: 'sold'
                 }
-                fetch(`http://localhost:2100/user/payment/${pay._id}`, {
+                fetch(`https://interverse.vercel.app/user/payment/${pay._id}`, {
                     method: 'PUT',
                     headers: {
                         'content-type': 'application/json'

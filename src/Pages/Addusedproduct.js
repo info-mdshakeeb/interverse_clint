@@ -16,7 +16,7 @@ const Addusedproduct = () => {
     const { data: seller = [] } = useQuery({
         queryKey: ['seller'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:2100/admin/${user?.email}`)
+            const res = await fetch(`https://interverse.vercel.app/admin/${user?.email}`)
             const data = await res.json()
             return data.data[0]
         }
@@ -39,7 +39,7 @@ const Addusedproduct = () => {
             condition: data.condition,
             description: data.description,
         }
-        fetch('http://localhost:2100/addusedproduct', {
+        fetch('https://interverse.vercel.app/addusedproduct', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -61,7 +61,7 @@ const Addusedproduct = () => {
     const { data: catagorysOptions = [], isLoading } = useQuery({
         queryKey: ['productcatagory'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:2100/productcatagorys')
+            const res = await fetch('https://interverse.vercel.app/productcatagorys')
             const data = await res.json()
             return data.data
         }

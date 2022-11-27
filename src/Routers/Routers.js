@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
             { path: '/blogs', element: <Blogs /> },
             {
                 path: '/productcatagory/:id',
-                loader: ({ params }) => fetch(`http://localhost:2100/productcatagory/${params.id}`),
+                loader: ({ params }) => fetch(`https://interverse.vercel.app/productcatagory/${params.id}`),
                 element: <PrivateRoute><ProductCatagory /></PrivateRoute>
             },
         ]

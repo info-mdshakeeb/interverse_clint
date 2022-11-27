@@ -31,7 +31,7 @@ const OrderModal = ({ setModalData, modalData }) => {
             price,
             mettingLocation,
         }
-        fetch('http://localhost:2100/bookings', {
+        fetch('https://interverse.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
