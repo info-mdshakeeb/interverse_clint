@@ -4,7 +4,7 @@ import { AuthUser } from '../Context/UserContext';
 import AlartMessage from '../Hooks/AlartMessage';
 
 const OrderModal = ({ setModalData, modalData }) => {
-    const { productName, resale_price, sellerName, sellerEmail, photoUrl } = modalData;
+    const { _id, productName, resale_price, sellerName, sellerEmail, photoUrl } = modalData;
     // console.log(modalData)
     const { user } = useContext(AuthUser)
     const navigate = useNavigate()
@@ -23,6 +23,7 @@ const OrderModal = ({ setModalData, modalData }) => {
             sellerName,
             sellerEmail,
             productName,
+            productID: _id,
             photoUrl,
             buyerName: user.displayName,
             buyerEmail: user.email,

@@ -39,8 +39,7 @@ const MyProduct = () => {
     if (isLoading) return <div className="flex h-screen items-center justify-center">
         <SmallSpin />
     </div>
-
-    console.log(orders);
+    // console.log(orders);
     return (
         <div>
             <p className="text-2xl py-3">My Product</p>
@@ -79,7 +78,7 @@ const MyProduct = () => {
                                     </td>
                                     {order.available === "available" &&
                                         <td>
-                                            {order.type ? <button
+                                            {order.type === 'publise' ? <button
 
                                                 className='btn btn-sm btn-disabledbtn-warning'>advertised</button> :
                                                 <button

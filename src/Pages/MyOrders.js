@@ -9,7 +9,7 @@ const MyOrders = () => {
     const [pay, setPay] = useState(null)
     const url = `http://localhost:2100/mybooking?email=${user.email}`;
 
-    const { data: bookings = [], isLoading } = useQuery({
+    const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: [''],
         queryFn: async () => {
             const res = await fetch(url)
@@ -20,8 +20,9 @@ const MyOrders = () => {
     if (isLoading) return <div className="flex h-screen items-center justify-center">
         <SmallSpin />
     </div>
+    refetch()
 
-    // console.log(bookings);
+    console.log(bookings);
     return (
         <div>
             <p className="text-2xl py-3">My Orders</p>
@@ -59,8 +60,8 @@ const MyOrders = () => {
                                         {booking.sellerName}<br />
                                         <span className="badge badge-ghost badge-sm">Email :{booking.sellerEmail}</span>
                                     </td>
-                                    {booking?.paid ? <td>payed</td> : <td>Pending</td>}
-                                    <td>{booking.price && !booking.paid &&
+                                    {booking?.available === "sold" ? <td className='btn btn-sm btn-disabled'>payed</td> : <td>Pending</td>}
+                                    <td>{!(booking?.available === "sold") &&
                                         <label
                                             onClick={() => setPay(booking)}
                                             htmlFor="paymemt-modal" className="btn btn-warning btn-sm">Pay</label>

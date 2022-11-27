@@ -1,14 +1,15 @@
 
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import AlartMessage from '../../../Hooks/AlartMessage';
 
-
-const PaymentForm = ({ pay }) => {
+const PaymentForm = ({ pay, setPay }) => {
     const { price, buyerPhone, buyerName } = pay
     const stripe = useStripe();
+    const { successMessage } = AlartMessage()
     const elements = useElements();
     const [clientSecret, setClientSecret] = useState("");
-
+    console.log(pay);
     useEffect(() => {
         fetch("http://localhost:2100/create-payment-intent", {
             method: "POST",
@@ -26,7 +27,7 @@ const PaymentForm = ({ pay }) => {
         if (card == null) {
             return;
         }
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
@@ -50,11 +51,34 @@ const PaymentForm = ({ pay }) => {
             console.log(confirmError.message);
             return;
         }
-        console.log(paymentIntent);
-        heandelPaymentStatus()
-    }
-    const heandelPaymentStatus = () => {
-        console.log('ddd');
+        successMessage("PayMent Complite")
+        const isAva = {
+            type: 'sold'
+        }
+        fetch(`http://localhost:2100/usephoneServices/publish/${pay.productID}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(isAva)
+        })
+            .then(rs => {
+                const type = {
+                    available: 'sold'
+                }
+                fetch(`http://localhost:2100/user/payment/${pay._id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(type)
+                }).then(rs => {
+                    setPay(null)
+                })
+                    .catch(err => console.log(err))
+
+            })
+            .catch(err => console.log(err))
     }
     return (
         <div className=" p-7">
@@ -75,7 +99,6 @@ const PaymentForm = ({ pay }) => {
                         },
                     }}
                 />
-
                 <div className="pt-5">
                     <button className=' btn btn-primary btn-sm btn-outline' type="submit"
                         disabled={!stripe || !clientSecret}>

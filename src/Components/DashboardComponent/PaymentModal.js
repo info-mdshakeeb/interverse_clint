@@ -6,7 +6,7 @@ import PaymentForm from './payment/PaymentForm';
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 
 const PaymentModal = ({ pay, isLoading, setPay }) => {
-    console.log(pay);
+    // console.log(pay);
     if (isLoading) return
 
     return (
@@ -25,6 +25,7 @@ const PaymentModal = ({ pay, isLoading, setPay }) => {
                         >
                             <PaymentForm
                                 pay={pay}
+                                setPay={setPay}
                             />
                         </Elements>
                     </div>
