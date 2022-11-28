@@ -21,7 +21,7 @@ const Hero = () => {
                     </div>
 
                     <div className="max-w-lg pt-20 lg:pt-0 lg:mx-12 lg:order-2">
-                        <h1 className="text-3xl font-medium tracking-wide text-gray-800 dark:text-white lg:text-4xl"> The best used Phone Here</h1>
+                        <h1 className="text-3xl font-medium tracking-wide dark:text-white lg:text-4xl"> The best used Phone Here</h1>
                         <p className="mt-4 text-gray-600 dark:text-gray-300">
                             Used smartphones are generally a safe investment, but there are any number of reasons why you might need to return it – it doesn't work as advertised, or you may even discover it's missing a critical feature you didn't realize you needed.</p>
                         {user?.email ?

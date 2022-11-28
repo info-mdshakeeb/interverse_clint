@@ -7,7 +7,7 @@ import { AuthUser } from '../Context/UserContext';
 const MyOrders = () => {
     const { user } = useContext(AuthUser);
     const [pay, setPay] = useState(null)
-    const url = `https://interverse.vercel.app/mybooking?email=${user.email}`;
+    const url = `https://interverse.vercel.app/mybooking?email=${user?.email}`;
     const { data: bookings = [], isLoading, refetch } = useQuery({
         queryKey: [''],
         queryFn: async () => {
@@ -23,8 +23,8 @@ const MyOrders = () => {
     // console.log(bookings);
     return (
         <div>
-            <p className="pl-5 text-2xl py-5">My Orders</p>
-            <div className="md:w-4/6 mx-auto">
+            <p className="pl-5  text-2xl py-5 lg:p-0">My Orders</p>
+            <div className=" mx-auto">
                 <div className="overflow-x-auto w-full">
                     <table className="table w-full">
 

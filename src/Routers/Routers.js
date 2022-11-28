@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <PrivateRoute><Dashbord /></PrivateRoute>,
+        element: <Dashbord />,
         children: [
             { path: '/dashboard/myproducts', element: <SellerRouter><MyProduct /> </SellerRouter> },
             { path: '/dashboard/myorders', element: <MyOrders /> },
@@ -48,7 +48,4 @@ export const router = createBrowserRouter([
     { path: '/login', element: <Login /> },
     { path: '/resistation', element: <Resistation /> },
     { path: '*', element: <ErrorPage />, },
-
-
-
 ])

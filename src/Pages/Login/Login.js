@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthUser } from '../../Context/UserContext';
 import AlartMessage from '../../Hooks/AlartMessage';
 import { setAuthToken } from '../../Hooks/auth';
@@ -9,8 +9,8 @@ const Login = () => {
     const { successMessage, errorMessage } = AlartMessage()
     const { loginEP, loginWithGoogle } = useContext(AuthUser)
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const location = useLocation()
-    const from = location.state?.from?.pathname || '/'
+    // const location = useLocation()
+    // const from = location.state?.from?.pathname || '/'
     const navigate = useNavigate()
     const onSubmit = data => {
         //login with email and passWord :
@@ -26,7 +26,7 @@ const Login = () => {
         loginWithGoogle()
             .then(re => {
                 successMessage('Login SuccessFull')
-                navigate(from, { replace: true })
+                navigate('/home')
                 setAuthToken(re.user, 'buyer')
             })
             .catch(error => { })
